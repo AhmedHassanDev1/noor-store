@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noor Store — Account Authentication</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FDF8F8',
+              100: '#FBECEE',
+              200: '#F5D3D8',
+              300: '#ECB1BA',
+              600: '#B24B5B',
+              700: '#943846',
+              800: '#752A36',
+              900: '#531923'
+            },
+            cream: '#FAF7F2'
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#FAF7F2] font-sans text-neutral-800 antialiased min-h-screen flex flex-col justify-between selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Top Minimal Brand Bar -->
+  <header class="w-full border-b border-rose-100/70 bg-white/80 backdrop-blur-sm sticky top-0 z-30">
+    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-serif text-sm font-semibold tracking-wider">
+          N
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif text-lg tracking-tight font-semibold text-neutral-900 leading-none">
+            NOOR <span class="italic font-light text-brand-600">Store</span>
+          </span>
+          <span class="text-[9px] tracking-[0.2em] uppercase text-neutral-400 font-medium mt-0.5">Haute Beauté</span>
+        </div>
+      </a>
+
+      <!-- Quick Back to Store Link -->
+      <a href="#" class="text-xs font-medium text-neutral-500 hover:text-brand-700 transition flex items-center gap-1.5 py-1 px-3 rounded-full hover:bg-brand-50 border border-transparent hover:border-brand-200">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+        <span>Back to catalog</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Centered Content Area -->
+  <main class="flex-1 flex items-center justify-center p-6 sm:py-12">
+    <div class="w-full max-w-md">
+
+      <!-- View Switcher Segment (Login / Sign Up) -->
+      <div class="flex justify-center mb-6">
+        <div class="bg-rose-100/60 p-1 rounded-full flex gap-1 border border-rose-200/50 shadow-inner">
+          <button id="tab-login" onclick="switchToTab('login')" class="px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 bg-white text-neutral-900 shadow-sm">
+            Sign In
+          </button>
+          <button id="tab-signup" onclick="switchToTab('signup')" class="px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 text-neutral-500 hover:text-neutral-800">
+            Create Account
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD: LOGIN FORM -->
+      <div id="card-login" class="bg-white rounded-2xl p-8 sm:p-10 shadow-[0_4px_25px_-4px_rgba(178,75,91,0.06),0_1px_3px_rgba(0,0,0,0.03)] border border-rose-100/80 transition-all duration-300">
+        <div class="text-center mb-8">
+          <h1 class="font-serif text-2xl sm:text-3xl text-neutral-900 tracking-tight mb-2">Welcome back</h1>
+          <p class="text-xs sm:text-sm text-neutral-500 font-light">Enter your credentials to access your Noor beauty account</p>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'Login')" class="space-y-4">
+          <div>
+            <label for="login-email" class="block text-xs font-medium uppercase tracking-wider text-neutral-500 mb-1.5">
+              Email address
+            </label>
+            <div class="relative">
+              <input 
+                type="email" 
+                id="login-email" 
+                required 
+                placeholder="name@example.com"
+                class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-brand-600 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-neutral-800 placeholder:text-neutral-400 bg-[#FCFBFA] transition"
+              >
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label for="login-password" class="block text-xs font-medium uppercase tracking-wider text-neutral-500">
+                Password
+              </label>
+              <a href="#" class="text-xs text-brand-600 hover:text-brand-800 transition">Forgot password?</a>
+            </div>
+            <div class="relative">
+              <input 
+                type="password" 
+                id="login-password" 
+                required 
+                placeholder="••••••••"
+                class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-brand-600 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-neutral-800 placeholder:text-neutral-400 bg-[#FCFBFA] transition"
+              >
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full mt-2 py-3.5 px-4 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-xl font-medium text-sm transition shadow-sm hover:shadow-md flex items-center justify-center gap-2 group"
+          >
+            <span>Login</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-0.5"></i>
+          </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-rose-50 text-center">
+          <p class="text-xs sm:text-sm text-neutral-500">
+            Don't have an account? 
+            <button onclick="switchToTab('signup')" class="text-brand-600 hover:text-brand-800 font-medium ml-1 underline decoration-brand-200 underline-offset-2 hover:decoration-brand-600 transition">
+              Sign up
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <!-- CARD: SIGN UP FORM -->
+      <div id="card-signup" class="hidden bg-white rounded-2xl p-8 sm:p-10 shadow-[0_4px_25px_-4px_rgba(178,75,91,0.06),0_1px_3px_rgba(0,0,0,0.03)] border border-rose-100/80 transition-all duration-300">
+        <div class="text-center mb-8">
+          <h1 class="font-serif text-2xl sm:text-3xl text-neutral-900 tracking-tight mb-2">Create account</h1>
+          <p class="text-xs sm:text-sm text-neutral-500 font-light">Join Noor Store for curated beauty rituals and exclusive perks</p>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'Sign Up')" class="space-y-4">
+          <div>
+            <label for="signup-name" class="block text-xs font-medium uppercase tracking-wider text-neutral-500 mb-1.5">
+              Full Name
+            </label>
+            <input 
+              type="text" 
+              id="signup-name" 
+              required 
+              placeholder="e.g. Leila Vance"
+              class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-brand-600 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-neutral-800 placeholder:text-neutral-400 bg-[#FCFBFA] transition"
+            >
+          </div>
+
+          <div>
+            <label for="signup-email" class="block text-xs font-medium uppercase tracking-wider text-neutral-500 mb-1.5">
+              Email address
+            </label>
+            <input 
+              type="email" 
+              id="signup-email" 
+              required 
+              placeholder="name@example.com"
+              class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-brand-600 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-neutral-800 placeholder:text-neutral-400 bg-[#FCFBFA] transition"
+            >
+          </div>
+
+          <div>
+            <label for="signup-password" class="block text-xs font-medium uppercase tracking-wider text-neutral-500 mb-1.5">
+              Password
+            </label>
+            <input 
+              type="password" 
+              id="signup-password" 
+              required 
+              placeholder="At least 8 characters"
+              class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:border-brand-600 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-neutral-800 placeholder:text-neutral-400 bg-[#FCFBFA] transition"
+            >
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full mt-2 py-3.5 px-4 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-xl font-medium text-sm transition shadow-sm hover:shadow-md flex items-center justify-center gap-2 group"
+          >
+            <span>Create Account</span>
+            <i data-lucide="check" class="w-4 h-4 transition-transform group-hover:scale-110"></i>
+          </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-rose-50 text-center">
+          <p class="text-xs sm:text-sm text-neutral-500">
+            Already have an account? 
+            <button onclick="switchToTab('login')" class="text-brand-600 hover:text-brand-800 font-medium ml-1 underline decoration-brand-200 underline-offset-2 hover:decoration-brand-600 transition">
+              Login
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Toast Feedback -->
+      <div id="auth-toast" class="opacity-0 transition-opacity duration-300 mt-4 mx-auto max-w-xs text-center py-2.5 px-4 rounded-xl text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center justify-center gap-2 pointer-events-none">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+        <span id="toast-text">Authentication successful</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Clean Minimal Footer -->
+  <footer class="w-full border-t border-rose-100/60 py-6 text-center text-xs text-neutral-400">
+    <p>© 2026 Noor Store Haute Beauté. All rights reserved.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function switchToTab(tab) {
+      const cardLogin = document.getElementById('card-login');
+      const cardSignup = document.getElementById('card-signup');
+      const btnLogin = document.getElementById('tab-login');
+      const btnSignup = document.getElementById('tab-signup');
+
+      if (tab === 'login') {
+        cardLogin.classList.remove('hidden');
+        cardSignup.classList.add('hidden');
+
+        btnLogin.className = "px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 bg-white text-neutral-900 shadow-sm";
+        btnSignup.className = "px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 text-neutral-500 hover:text-neutral-800";
+      } else {
+        cardLogin.classList.add('hidden');
+        cardSignup.classList.remove('hidden');
+
+        btnSignup.className = "px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 bg-white text-neutral-900 shadow-sm";
+        btnLogin.className = "px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 text-neutral-500 hover:text-neutral-800";
+      }
+      lucide.createIcons();
+    }
+
+    function handleAuthSubmit(e, actionType) {
+      e.preventDefault();
+      const toast = document.getElementById('auth-toast');
+      const toastText = document.getElementById('toast-text');
+      
+      toastText.innerText = actionType === 'Login' ? 'Logged in successfully' : 'Account created successfully';
+      toast.classList.remove('opacity-0');
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

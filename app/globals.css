@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root { 
+  color-scheme: light; 
+  --background: #FAF7F2; 
+  --foreground: #1E1718; 
+  --border: #F4D5D9; 
+  --radius: .75rem; 
+}
+
+@theme inline { 
+  --color-background: var(--background); 
+  --color-foreground: var(--foreground); 
+  --color-border: var(--border); 
+  --radius-sm: calc(var(--radius) * .5); 
+  --radius-md: var(--radius); 
+  --radius-lg: calc(var(--radius) * 1.5); 
+  --radius-xl: calc(var(--radius) * 2); 
+
+  --color-brand-50: #FDF7F7;
+  --color-brand-100: #F9ECEE;
+  --color-brand-200: #F4D5D9;
+  --color-brand-300: #EAB2B9;
+  --color-brand-400: #DD8B97;
+  --color-brand-500: #C96574;
+  --color-brand-600: #B24B5B;
+  --color-brand-rose: #D48B96;
+  --color-brand-rosegold: #C5908E;
+  --color-brand-gold: #B68D40;
+  --color-brand-cream: #FAF7F2;
+  --color-brand-surface: #FFFDFC;
+  --color-brand-dark: #1E1718;
+  --color-brand-muted: #7C6F71;
+
+  --shadow-soft: 0 8px 30px rgba(212, 139, 150, 0.08);
+  --shadow-card: 0 4px 20px rgba(178, 75, 91, 0.06);
+  --shadow-floating: 0 20px 40px -15px rgba(178, 75, 91, 0.15);
+
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-jakarta);
+
+  /* Admin Material 3 Theme Mappings */
+  --color-primary: #B24B5B;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #F9ECEE;
+  --color-on-primary-container: #1E1718;
+  --color-on-primary-fixed-variant: #943846;
+
+  --color-surface: #FFFDFC;
+  --color-on-surface: #1E1718;
+  --color-on-surface-variant: #7C6F71;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #FDF7F7;
+  --color-surface-container: #F9ECEE;
+  --color-surface-container-high: #F4D5D9;
+  --color-surface-container-highest: #EAB2B9;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #410002;
+
+  --color-outline: #7C6F71;
+  --color-outline-variant: #C5908E;
+
+  --spacing-space-xs: 0.5rem;
+  --spacing-space-sm: 0.75rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+  --spacing-margin-mobile: 1rem;
+
+  --text-headline-lg: 2rem;
+  --text-headline-sm: 1.5rem;
+  --text-title-md: 1.125rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label-md: 0.875rem;
+  --text-label-sm: 0.75rem;
+}
+
+@layer utilities {
+  .font-headline-lg { font-family: var(--font-playfair); font-weight: 700; }
+  .font-headline-sm { font-family: var(--font-playfair); font-weight: 700; }
+  .font-title-md { font-family: var(--font-jakarta); font-weight: 600; }
+  .font-body-md { font-family: var(--font-jakarta); font-weight: 400; }
+  .font-body-sm { font-family: var(--font-jakarta); font-weight: 400; }
+  .font-label-md { font-family: var(--font-jakarta); font-weight: 500; }
+  .font-label-sm { font-family: var(--font-jakarta); font-weight: 500; }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-jakarta), Arial, Helvetica, sans-serif; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+.font-serif { font-family: var(--font-playfair), Georgia, 'Times New Roman', serif; }
+::selection { background: var(--color-brand-200); color: var(--color-brand-dark); }
+@media (prefers-reduced-motion: no-preference) { button, a { transition: color .2s, background-color .2s, border-color .2s, opacity .2s; } }
+
+@layer base { * { border-color: var(--border); } }
+
+@keyframes slideIn {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.toast-anim {
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

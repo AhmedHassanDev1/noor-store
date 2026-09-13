@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-error": "#ffffff",
+          "tertiary-container": "#916255",
+          "secondary-fixed-dim": "#ffb2ba",
+          "surface-dim": "#e4d7d9",
+          "on-background": "#211a1c",
+          "on-primary": "#ffffff",
+          "primary-fixed": "#ffd9dc",
+          "on-tertiary-fixed": "#31120a",
+          "on-secondary-fixed": "#400011",
+          "on-tertiary": "#ffffff",
+          "on-tertiary-container": "#ffede8",
+          "on-secondary-fixed-variant": "#7b2b39",
+          "surface-container-highest": "#eddfe1",
+          "on-primary-fixed-variant": "#802537",
+          "background": "#fff8f8",
+          "primary-fixed-dim": "#ffb2ba",
+          "on-secondary-container": "#792938",
+          "primary-container": "#b24b5b",
+          "outline-variant": "#dbc0c2",
+          "tertiary-fixed": "#ffdbd1",
+          "surface-container": "#f8ebed",
+          "on-tertiary-fixed-variant": "#653c31",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-fixed-dim": "#f3b9aa",
+          "surface-tint": "#9f3d4d",
+          "surface": "#fff8f8",
+          "primary": "#933344",
+          "on-secondary": "#ffffff",
+          "on-surface": "#211a1c",
+          "on-primary-container": "#ffecec",
+          "secondary-fixed": "#ffd9dc",
+          "surface-bright": "#fff8f8",
+          "error-container": "#ffdad6",
+          "inverse-primary": "#ffb2ba",
+          "inverse-on-surface": "#fbedef",
+          "error": "#ba1a1a",
+          "secondary": "#994250",
+          "surface-container-high": "#f3e5e7",
+          "outline": "#887173",
+          "surface-container-low": "#fef0f2",
+          "secondary-container": "#ff94a2",
+          "on-error-container": "#93000a",
+          "tertiary": "#754a3e",
+          "on-surface-variant": "#554243",
+          "inverse-surface": "#362e30",
+          "on-primary-fixed": "#400010",
+          "surface-variant": "#eddfe1"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-sm": "0.75rem",
+          "space-md": "1.25rem",
+          "space-xs": "0.375rem",
+          "gutter": "1.5rem",
+          "margin-mobile": "1.25rem",
+          "gutter-sm": "1rem",
+          "space-xl": "3rem",
+          "margin": "2.5rem",
+          "space-lg": "2rem"
+        },
+        "fontFamily": {
+          "headline-md": [
+            "Playfair Display"
+          ],
+          "display-lg": [
+            "Playfair Display"
+          ],
+          "headline-lg-mobile": [
+            "Playfair Display"
+          ],
+          "label-md": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-sm": [
+            "Playfair Display"
+          ],
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "title-md": [
+            "Plus Jakarta Sans"
+          ],
+          "body-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "display-lg-mobile": [
+            "Playfair Display"
+          ],
+          "headline-lg": [
+            "Playfair Display"
+          ],
+          "body-md": [
+            "Plus Jakarta Sans"
+          ],
+          "label-sm": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "0em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg": [
+            "56px",
+            {
+              "lineHeight": "64px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg-mobile": [
+            "28px",
+            {
+              "lineHeight": "34px",
+              "letterSpacing": "0em",
+              "fontWeight": "500"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.08em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "0em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            }
+          ],
+          "title-md": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "26px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg-mobile": [
+            "38px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "22px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.06em",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/90 backdrop-blur-md shadow-[0_1px_8px_rgba(143,58,72,0.04)]"><div class="h-20 w-full px-margin-mobile md:px-space-lg lg:px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="group flex flex-col" data-path="products-management" href="#"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">NOOR <span class="font-headline-sm text-headline-sm text-primary italic font-normal">Store</span></span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-[0.2em] -mt-1">Haute Beauté</span></a><div class="hidden md:block h-6 w-[1px] bg-outline-variant/50"></div><nav class="flex items-center gap-space-xs" data-active-classes="bg-surface-container-highest text-primary font-semibold shadow-sm"><a class="px-space-sm py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="storefront" href="#">Storefront</a><a aria-current="page" class="px-space-sm py-space-xs rounded-full transition-all bg-surface-container-highest text-primary font-semibold shadow-sm" data-path="products-management" href="#">Products Management</a></nav></div><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-space-xs px-space-sm rounded-lg hover:bg-surface-container" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span class="hidden sm:inline">Exit</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<div class="fixed top-24 right-6 z-50 flex flex-col gap-space-xs pointer-events-none" id="toast-container"></div>
+<div class="w-full max-w-4xl mx-auto py-space-xl px-margin-mobile md:px-space-md">
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+<div class="space-y-space-xs">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm tracking-widest uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          Boutique Inventory
+        </div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Products Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+          Add new formulations to the boutique catalog or manage existing luxury inventory with quiet precision.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-lowest px-space-md py-space-xs rounded-full shadow-[0_4px_20px_-4px_rgba(143,58,72,0.06)] self-start md:self-auto">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Products:</span>
+<span class="font-title-md text-title-md text-primary font-semibold" id="product-count-badge">6</span>
+</div>
+</header>
+<div class="space-y-space-xl">
+<!-- Section 1: Add New Product Form -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md md:p-space-lg shadow-[0_8px_30px_-4px_rgba(143,58,72,0.05)]">
+<div class="flex items-center gap-space-xs mb-space-md">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Add New Product</h2>
+</div>
+<form class="space-y-space-md" id="add-product-form">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<div class="md:col-span-5 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="input-name">Product Name</label>
+<input class="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30" id="input-name" placeholder="e.g. Rose Quartz Hydrating Mist" required="" type="text"/>
+</div>
+<div class="md:col-span-3 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="input-price">Price (USD)</label>
+<div class="relative flex items-center">
+<span class="absolute left-4 font-body-md text-body-md text-on-surface-variant select-none">$</span>
+<input class="w-full h-12 pl-8 pr-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30" id="input-price" min="0" placeholder="38.00" required="" step="0.01" type="number"/>
+</div>
+</div>
+<div class="md:col-span-4 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="input-image">Image URL</label>
+<input class="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30" id="input-image" placeholder="https://images.unsplash.com/..." type="url"/>
+</div>
+</div>
+<div class="flex items-center justify-end pt-space-xs">
+<button class="group inline-flex items-center gap-space-xs px-space-lg h-12 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider hover:bg-on-primary-fixed-variant transition-all shadow-[0_4px_14px_rgba(147,51,68,0.25)] active:scale-[0.99]" type="submit">
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:rotate-90">add</span>
+<span>Add Product</span>
+</button>
+</div>
+</form>
+</section>
+<!-- Section 2: Products List -->
+<section class="space-y-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Current Products</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Review and manage all products currently live in the Noor Store catalog.</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_8px_30px_-4px_rgba(143,58,72,0.05)] overflow-hidden">
+<ul class="divide-y-0" id="product-list">
+<!-- Item 1 -->
+<li class="product-item flex items-center justify-between p-space-md md:px-space-lg hover:bg-surface-container-low/50 transition-colors duration-200">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Minimalist frosted amber glass dropper bottle containing golden serum resting on pale pink raw travertine marble under soft studio morning light, elegant cosmetics product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB8zFDElvD6_n79FQgl9tM7zRzn3Yy-BmwmGlivdhRYDS1TxvmJt56rDCNKMIoszUmK71BoWL6B-A8ltzanckVwdJHo02R9UHvde8PofTUn4KAwHrhCPu478SNGusIiH2cD68TMwZdaK6v1tuti1WOPZikX5bJ_WOfKcvuN68eRjEJT9rxGKVLlNuPNklX7AmEHNozjPmv8DUKwmGkg6vkJZFjQVVETM5M8C2mRVliTlIQaEQ-207HRg"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Luminous Silk Radiance Serum</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">Skin Elixir</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg shrink-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">$48.00</span>
+<button class="delete-btn p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Delete formulation" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</li>
+<!-- Item 2 -->
+<li class="product-item flex items-center justify-between p-space-md md:px-space-lg hover:bg-surface-container-low/50 transition-colors duration-200">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Luxury rose gold metallic lipstick tube open to reveal deep velvety matte rose pigment against warm creamy architectural background, editorial beauty shoot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJyP3eb2J_BM1uk6dwi1oRhzzmfJVJJA_mTUk3Rougf-OyVrZnxVcyhVVPPz8XloHiTkTIDrd3Pn7zDNduUjFkZPBJ-IqWls1Eu8qpPFCXxgDmjhdC8DB_8Ey-PASV-0IUmtGlhWs1wRQz5L1uyLt-7gHEXA_wrPUwGkTqWvc5M9vkmfKBEBNqM-jAyxrcMs4e611wZcmezzT9PHuqp3ZOeuKkU5LthRpyjtpAIHRFx3mTxALaF4ovqg"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Rose Petal Velvet Matte Lipstick</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">Lip Color</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg shrink-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">$32.00</span>
+<button class="delete-btn p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Delete formulation" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</li>
+<!-- Item 3 -->
+<li class="product-item flex items-center justify-between p-space-md md:px-space-lg hover:bg-surface-container-low/50 transition-colors duration-200">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Sleek open nine-pan warm terracota and shimmer blush eyeshadow palette on smooth ivory linen fabric, soft daylight, luxury cosmetic brand imagery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMQtp_r8DOhrYKleFs_Kmz0_LIBGJGWbZ_6I9r1u0HeYV6tS8hXzQw_l6srm4IuHm53ZeSSWov62xmFEUef-YeZ4AMyGmGHkH_CiztV5TA0VFSIJxvgnwAqFBfxfHqJDHDv41ScZ9BKCDardHlsgm8dI4N4knZKdAVYXvAVLCLLm7Fko395YDQXpR83Fg5QncVbRNgLIwm39RMwZ283eyreKbgaIC-dLizfXXGXVqawzOAj3xfOpfV6A"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Desert Sunset Eyeshadow Palette</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">Eye Complexion</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg shrink-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">$56.00</span>
+<button class="delete-btn p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Delete formulation" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</li>
+<!-- Item 4 -->
+<li class="product-item flex items-center justify-between p-space-md md:px-space-lg hover:bg-surface-container-low/50 transition-colors duration-200">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Frosted glass mist dispenser bottle with golden atomizer pump capturing light water droplets in air, soft neutral beige background, high-end skincare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe5eFRvdLrGieiQeT6XyiTfOOoFFvHAzrmb8N0fI26IaS0SmpWy4iGZaQDQ4pm1zdVf-URfVw9Q953ACcogCWqskAwBqSYx2-xZ4_erSHth52VUWYQ4gKUDDrys6h4BqZazrZDHd4ORboArqh5m_ItIkETaImGNKnv51UG_-ah8Ivq2DIm3b13AuCNW-P03qRbkYNsN1z3ZBWTKjghYBd_CAnzuqZG8FwbyHTQL2f1ELG4pUjqYQ5TzA"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Golden Hour Glow Facial Mist</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">Hydrating Mist</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg shrink-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">$28.00</span>
+<button class="delete-btn p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Delete formulation" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</li>
+<!-- Item 5 -->
+<li class="product-item flex items-center justify-between p-space-md md:px-space-lg hover:bg-surface-container-low/50 transition-colors duration-200">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Heavy clear glass cosmetic pot filled with blush pink whipped hydrating cream beside a delicate pale silk ribbon, soft organic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCxldrnhvi31Tk9-go2FFEQ-9K7hmPTjyo7hH9QBwtJGVUevVsI0XsuZ91OckLNXSU-N2AAc50hNWmcXoOgfzB76jA3IuPlRtZ8Dz48hAhQW5PaQw3D54EvJFXSx82sutnn8WRDLCLPkBqtHRLtm4UZBb7wkyG8g1yt_geiod82SufucGY9gAucpQ747a_KOyqYPu6wa-P7yRxLg5TuJltEnIEhziQngjcfZ8GDrFxB0cKDmulW9kHMw"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Celestial Rose Hydrating Cream</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">Moisturizer</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg shrink-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">$64.00</span>
+<button class="delete-btn p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Delete formulation" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</li>
+<!-- Item 6 -->
+<li class="product-item flex items-center justify-between p-space-md md:px-space-lg hover:bg-surface-container-low/50 transition-colors duration-200">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Clear glossy squeeze tube with pink-tinted lip peptide balm on clean warm white ceramic pedestal, soft diffused studio lighting, modern minimalist beauty design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMuhPIJR5y7SMqLDrYz8FUd6Au7gFq6LfHDKuNAk49WY0QlB1zn34z5xlRFAVk3pqqVxKDXsNunVcpQ17ymUMGHxfEGpNcJPEDAQRzzKKMW_yKFXHcQY2kWOjeLG4LiN-3PAEELXHS6Cppd4Una8Yf8YCs_4D-Ngr16pZSLKt9VrX1oK-PmSaMc1osvR63rtMaHk22I9Bu-MSr2EaiUdct3tRpjAhc-bDuAk7xMrnHt2GxV0sp0x0Jgw"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Sheer Nectar Peptide Lip Glaze</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">Lip Treatment</span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg shrink-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">$24.00</span>
+<button class="delete-btn p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Delete formulation" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</li>
+</ul>
+<div class="hidden p-space-xl text-center flex-col items-center justify-center space-y-space-xs" id="empty-state">
+<span class="material-symbols-outlined text-[36px] text-outline">inventory_2</span>
+<p class="font-title-md text-title-md text-on-surface">No products currently active</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Use the form above to add your first formulation to the boutique catalog.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const list = document.getElementById('product-list');
+    const countBadge = document.getElementById('product-count-badge');
+    const emptyState = document.getElementById('empty-state');
+    const form = document.getElementById('add-product-form');
+    const toastContainer = document.getElementById('toast-container');
+
+    function updateCount() {
+      const items = list.querySelectorAll('.product-item');
+      const count = items.length;
+      countBadge.textContent = count;
+      if (count === 0) {
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+      } else {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+      }
+    }
+
+    function showToast(message, isError = false) {
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto flex items-center gap-space-xs px-space-md py-space-xs rounded-xl shadow-lg transition-all duration-300 transform translate-y-2 opacity-0 ${
+        isError 
+          ? 'bg-error text-on-error' 
+          : 'bg-surface-container-lowest text-on-surface shadow-[0_10px_30px_-5px_rgba(143,58,72,0.15)]'
+      }`;
+      
+      const icon = isError ? 'info' : 'check_circle';
+      const iconColor = isError ? 'text-on-error' : 'text-primary';
+
+      toast.innerHTML = `
+        <span class="material-symbols-outlined text-[18px] ${iconColor}">${icon}</span>
+        <span class="font-body-md text-body-md">${message}</span>
+      `;
+
+      toastContainer.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-1');
+        setTimeout(() => {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
+
+    function attachDeleteHandler(button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const row = this.closest('.product-item');
+        if (!row) return;
+
+        row.style.transition = 'all 0.25s ease-out';
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(10px)';
+
+        setTimeout(() => {
+          if (row.parentNode) {
+            row.parentNode.removeChild(row);
+            updateCount();
+            showToast('Formulation removed from catalog');
+          }
+        }, 250);
+      });
+    }
+
+    // Attach to pre-filled items
+    document.querySelectorAll('.delete-btn').forEach(attachDeleteHandler);
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('input-name');
+      const priceInput = document.getElementById('input-price');
+      const imageInput = document.getElementById('input-image');
+
+      const nameVal = nameInput.value.trim();
+      const priceVal = parseFloat(priceInput.value);
+      const imageVal = imageInput.value.trim();
+
+      if (!nameVal || isNaN(priceVal)) {
+        showToast('Please provide valid product details.', true);
+        return;
+      }
+
+      const formattedPrice = '$' + priceVal.toFixed(2);
+      const li = document.createElement('li');
+      li.className = 'product-item flex items-center justify-between p-space-md md:px-space-lg hover:bg-surface-container-low/50 transition-colors duration-200 opacity-0 transform -translate-y-2';
+
+      const hasCustomImage = imageVal.length > 0;
+      const imgMarkup = hasCustomImage
+        ? `<img src="${imageVal}" alt="${nameVal}" class="w-full h-full object-cover" onerror="this.src='placeholder'">`
+        : `<img src="placeholder" data-alt="Minimalist aesthetic luxury cosmetic formulation with pure packaging for ${nameVal}, warm rose and cream daylight lighting" class="w-full h-full object-cover">`;
+
+      li.innerHTML = `
+        <div class="flex items-center gap-space-md min-w-0">
+          <div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-sm">
+            ${imgMarkup}
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-title-md text-title-md text-on-surface truncate">${nameVal}</h3>
+            <span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">New Addition</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-space-lg shrink-0">
+          <span class="font-headline-sm text-headline-sm text-on-surface font-medium">${formattedPrice}</span>
+          <button type="button" class="delete-btn p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Delete formulation">
+            <span class="material-symbols-outlined text-[20px]">delete</span>
+          </button>
+        </div>
+      `;
+
+      list.insertBefore(li, list.firstChild);
+      attachDeleteHandler(li.querySelector('.delete-btn'));
+
+      requestAnimationFrame(() => {
+        li.style.transition = 'all 0.3s ease-out';
+        li.classList.remove('opacity-0', '-translate-y-2');
+      });
+
+      form.reset();
+      updateCount();
+      showToast('Product added to boutique catalog');
+    });
+
+    updateCount();
+  })();
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(143,58,72,0.03)] mt-space-xl py-space-lg"><div class="w-full px-margin-mobile md:px-space-lg lg:px-margin flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary">NOOR</span><span class="font-label-sm text-label-sm text-on-surface-variant">— Admin Atelier</span></div><div class="font-body-sm text-body-sm text-on-surface-variant">© 2024 NOOR Store Haute Beauté. All rights reserved.</div></div></footer></body></html>
