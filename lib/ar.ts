@@ -22,6 +22,17 @@ export const storefrontCategories = [
   { value: 'Eyes', label: 'العيون' },
 ] as const
 
+export const adminCategories = [
+  { value: 'skincare', label: 'العناية بالبشرة' },
+  { value: 'lips', label: 'الشفاه' },
+  { value: 'eyes', label: 'العيون' },
+  { value: 'beauty', label: 'الجمال' },
+] as const
+
+export function joinTags(tags: string[] | null | undefined) {
+  return (tags ?? []).join('، ')
+}
+
 export function matchesCategory(productCategory: string, filterValue: string) {
   if (filterValue === 'All') return true
   return normalizeCategory(productCategory) === normalizeCategory(filterValue)

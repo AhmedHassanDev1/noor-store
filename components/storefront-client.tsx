@@ -12,7 +12,7 @@ export default function StorefrontClient({ products }: { products: any[] }) {
 
   const filteredProducts = products.filter(p => matchesCategory(p.category, activeCategory))
 
-  const WHATSAPP_PHONE = "201001234567"
+  const WHATSAPP_PHONE = "201007294481"
 
   return (
     <div>
