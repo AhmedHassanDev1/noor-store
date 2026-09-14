@@ -8,7 +8,7 @@ export async function POST(req: Request) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { message: 'Email and password are required' },
+        { message: 'البريد الإلكتروني وكلمة المرور مطلوبان' },
         { status: 400 }
       )
     }
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
     if (existingUser) {
       return NextResponse.json(
-        { message: 'User with this email already exists' },
+        { message: 'يوجد حساب مسجل بهذا البريد الإلكتروني' },
         { status: 409 }
       )
     }
@@ -35,13 +35,13 @@ export async function POST(req: Request) {
     })
 
     return NextResponse.json(
-      { message: 'User created successfully', userId: user.id },
+      { message: 'تم إنشاء الحساب بنجاح', userId: user.id },
       { status: 201 }
     )
   } catch (error) {
     console.error('Registration error:', error)
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { message: 'حدث خطأ داخلي، يرجى المحاولة لاحقاً' },
       { status: 500 }
     )
   }

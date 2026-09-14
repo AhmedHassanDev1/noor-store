@@ -1,21 +1,22 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google'
+import { Amiri, Cairo } from 'next/font/google'
 import './globals.css'
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
+const amiri = Amiri({
+  weight: ['400', '700'],
+  subsets: ['arabic'],
+  variable: '--font-amiri',
 })
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-jakarta',
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  variable: '--font-cairo',
 })
 
 export const metadata: Metadata = {
-  title: 'NOOR Store — Haute Beauté',
-  description: 'Botanical skincare and couture beauty essentials, curated by NOOR Store.',
+  title: 'متجر نور — الجمال الفاخر',
+  description: 'منتجات العناية بالبشرة والجمال الفاخر، مختارة بعناية من متجر نور.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -58,11 +59,11 @@ export default async function RootLayout({
   const isAuthenticated = !!session?.user
 
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
-      <body className={`${playfair.variable} ${jakarta.variable} antialiased`}>
+      <body className={`${amiri.variable} ${cairo.variable} antialiased`}>
         <CartProvider>
           <GlobalLayout isAuthenticated={isAuthenticated}>
             {children}

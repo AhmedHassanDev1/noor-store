@@ -65,7 +65,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }]
       }
     })
-    showToast(`Added "${product.name}" to your shopping bag`)
+    showToast(`تمت إضافة "${product.name}" إلى حقيبة التسوق`)
   }
 
   const updateQuantity = (productId: string, delta: number) => {
@@ -84,7 +84,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const removeFromCart = (productId: string) => {
     setCart(prev => prev.filter(item => item.id !== productId))
-    showToast("Item removed from your bag")
+    showToast('تمت إزالة المنتج من حقيبتك')
   }
 
   const totalItemsCount = cart.reduce((acc, item) => acc + item.quantity, 0)
@@ -102,8 +102,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }}>
       {children}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 toast-anim">
-          <div className="bg-brand-dark text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3 border border-brand-200/20">
+        <div className="fixed bottom-6 start-6 z-50 toast-anim">
+          <div className="bg-brand-dark text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-brand-200/20">
             <span className="w-2.5 h-2.5 rounded-full bg-brand-400 animate-ping"></span>
             <span className="text-sm font-medium">{toast}</span>
             <span className="material-symbols-outlined text-[16px] text-brand-400">sparkles</span>

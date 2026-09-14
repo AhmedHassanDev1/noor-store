@@ -1,6 +1,8 @@
 import StorefrontClient from '@/components/storefront-client'
 import prisma from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const products = await prisma.product.findMany({
     where: { active: true },

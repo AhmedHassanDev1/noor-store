@@ -1,8 +1,8 @@
 'use client'
 
 import { useCart } from '@/components/cart-provider'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { translateCategory } from '@/lib/ar'
 
 export default function CartPage() {
   const { cart, updateQuantity, removeFromCart, cartTotal, totalItemsCount } = useCart()
@@ -11,24 +11,26 @@ export default function CartPage() {
 
   const handleCheckoutWhatsApp = () => {
     if (cart.length === 0) return
-    const itemsList = cart.map(i => `• ${i.name} x${i.quantity} (EGP ${(Number(i.price) * i.quantity).toFixed(2)})`).join('\n')
-    const text = `Hello Noor Store, I would like to order the following items from my cart:\n\n${itemsList}\n\n*Total Order Price:* EGP ${cartTotal.toFixed(2)}\n\nPlease provide payment and delivery details. Thank you!`
+    const itemsList = cart.map(i => `• ${i.name} ×${i.quantity} (${(Number(i.price) * i.quantity).toFixed(2)} ج.م)`).join('\n')
+    const text = `مرحباً متجر نور، أود طلب المنتجات التالية من سلتي:\n\n${itemsList}\n\n*إجمالي الطلب:* ${cartTotal.toFixed(2)} ج.م\n\nيرجى تزويدي بتفاصيل الدفع والتوصيل. شكراً!`
     const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`
     window.open(url, '_blank')
   }
+
+  const itemWord = totalItemsCount === 1 ? 'منتج' : totalItemsCount === 2 ? 'منتجان' : 'منتجات'
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-brand-dark">Your Shopping Bag</h1>
-          <p className="text-sm text-brand-muted mt-1">{totalItemsCount} {totalItemsCount === 1 ? 'item' : 'items'} curated for you.</p>
+          <h1 className="font-serif text-3xl font-bold text-brand-dark">حقيبة التسوق</h1>
+          <p className="text-sm text-brand-muted mt-1">{totalItemsCount} {itemWord} مختارة لك.</p>
         </div>
         <button 
           onClick={() => router.push('/')}
           className="text-sm font-medium text-brand-600 hover:text-brand-dark transition underline-offset-4 hover:underline"
         >
-          Continue Browsing
+          متابعة التصفح
         </button>
       </div>
 
@@ -37,13 +39,13 @@ export default function CartPage() {
           <div className="w-16 h-16 rounded-full bg-brand-100 flex items-center justify-center mx-auto mb-4">
             <span className="material-symbols-outlined text-[28px] text-brand-400">shopping_bag</span>
           </div>
-          <h2 className="font-serif text-xl font-bold text-brand-dark mb-2">Your bag is beautifully empty</h2>
-          <p className="text-sm text-brand-muted mb-6">Discover our latest formulations and add your favorites here.</p>
+          <h2 className="font-serif text-xl font-bold text-brand-dark mb-2">حقيبتك فارغة</h2>
+          <p className="text-sm text-brand-muted mb-6">اكتشفي أحدث تركيباتنا وأضيفي المفضلة لديك هنا.</p>
           <button 
             onClick={() => router.push('/')}
             className="px-6 py-3 rounded-full bg-brand-dark text-white text-sm font-medium hover:bg-brand-600 transition"
           >
-            Explore The Collection
+            استكشفي المجموعة
           </button>
         </div>
       ) : (
@@ -58,13 +60,13 @@ export default function CartPage() {
                 <div className="flex-1 flex flex-col justify-between h-full w-full">
                   <div className="flex justify-between items-start gap-4">
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-brand-600 font-bold">{item.category}</span>
+                      <span className="text-[10px] uppercase tracking-wider text-brand-600 font-bold">{translateCategory(item.category)}</span>
                       <h3 className="font-serif text-lg font-bold text-brand-dark leading-tight mt-1">{item.name}</h3>
                     </div>
                     <button 
                       onClick={() => removeFromCart(item.id)}
                       className="text-brand-muted hover:text-red-500 transition"
-                      aria-label="Remove item"
+                      aria-label="إزالة المنتج"
                     >
                       <span className="material-symbols-outlined text-[20px]">close</span>
                     </button>
@@ -88,7 +90,7 @@ export default function CartPage() {
                     </div>
                     
                     <span className="font-serif text-lg font-bold text-brand-dark">
-                      EGP {(Number(item.price) * item.quantity).toFixed(2)}
+                      {(Number(item.price) * item.quantity).toFixed(2)} ج.م
                     </span>
                   </div>
                 </div>
@@ -98,26 +100,26 @@ export default function CartPage() {
 
           <div className="lg:col-span-4">
             <div className="bg-brand-surface rounded-3xl border border-brand-200 p-6 sm:p-8 shadow-soft sticky top-28">
-              <h3 className="font-serif text-lg font-bold text-brand-dark mb-6">Order Summary</h3>
+              <h3 className="font-serif text-lg font-bold text-brand-dark mb-6">ملخص الطلب</h3>
               
               <div className="space-y-4 text-sm mb-6 border-b border-brand-200 pb-6">
                 <div className="flex justify-between text-brand-muted">
-                  <span>Subtotal ({totalItemsCount} items)</span>
-                  <span className="text-brand-dark font-medium">EGP {cartTotal.toFixed(2)}</span>
+                  <span>المجموع الفرعي ({totalItemsCount} منتج)</span>
+                  <span className="text-brand-dark font-medium">{cartTotal.toFixed(2)} ج.م</span>
                 </div>
                 <div className="flex justify-between text-brand-muted">
-                  <span>Shipping</span>
-                  <span className="text-brand-600 font-medium">Complimentary</span>
+                  <span>الشحن</span>
+                  <span className="text-brand-600 font-medium">مجاني</span>
                 </div>
                 <div className="flex justify-between text-brand-muted">
-                  <span>Taxes</span>
-                  <span className="text-brand-dark font-medium">Calculated at checkout</span>
+                  <span>الضرائب</span>
+                  <span className="text-brand-dark font-medium">تُحسب عند الدفع</span>
                 </div>
               </div>
 
               <div className="flex justify-between items-center mb-8">
-                <span className="font-serif text-xl font-bold text-brand-dark">Total</span>
-                <span className="font-serif text-2xl font-bold text-brand-600">EGP {cartTotal.toFixed(2)}</span>
+                <span className="font-serif text-xl font-bold text-brand-dark">الإجمالي</span>
+                <span className="font-serif text-2xl font-bold text-brand-600">{cartTotal.toFixed(2)} ج.م</span>
               </div>
 
               <button 
@@ -125,11 +127,11 @@ export default function CartPage() {
                 className="w-full h-14 bg-brand-dark hover:bg-brand-600 text-white rounded-full font-medium text-sm tracking-wide transition-all shadow-lg hover:shadow-floating active:scale-95 flex items-center justify-center gap-2 mb-3"
               >
                 <span className="material-symbols-outlined text-[18px]">lock</span>
-                Secure Checkout via WhatsApp
+                إتمام الطلب عبر واتساب
               </button>
               
               <p className="text-[11px] text-brand-muted text-center leading-relaxed">
-                By proceeding, you will be redirected to WhatsApp to finalize your payment details securely with our beauty concierges.
+                بالمتابعة، سيتم تحويلك إلى واتساب لإتمام تفاصيل الدفع بأمان مع مستشاري الجمال لدينا.
               </p>
             </div>
           </div>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { saveProduct, deleteProduct } from '@/app/admin/actions'
+import { translateCategory } from '@/lib/ar'
 
 type Product = {
   id: string;
@@ -32,7 +33,7 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
   async function save(e: React.FormEvent) {
     e.preventDefault()
     if (!form.name || !form.price) {
-      addToast('Please provide valid product details.', true)
+      addToast('يرجى إدخال تفاصيل المنتج بشكل صحيح.', true)
       return
     }
     
@@ -40,9 +41,9 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
       name: form.name, 
       price: Number(form.price), 
       image_url: form.image_url || undefined,
-      description: 'New product',
-      brand: 'NOOR Store',
-      category: 'New Addition',
+      description: 'منتج جديد',
+      brand: 'متجر نور',
+      category: 'إضافة جديدة',
       stock: 10,
       active: true
     }
@@ -51,18 +52,18 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
       const result = await saveProduct(payload)
       setProducts(current => [result as any, ...current])
       setForm({ name: '', price: '', image_url: '' })
-      addToast('Product added to boutique catalog')
+      addToast('تمت إضافة المنتج إلى المتجر')
     } catch(e: any) {
       addToast(e.message, true)
     }
   }
 
   async function remove(id: string) {
-    if (!window.confirm('Remove this product from the catalog?')) return
+    if (!window.confirm('هل تريد إزالة هذا المنتج من المتجر؟')) return
     try {
       await deleteProduct(id)
       setProducts(current => current.filter(p => p.id !== id))
-      addToast('Formulation removed from catalog')
+      addToast('تمت إزالة المنتج من المتجر')
     } catch(e: any) {
       addToast(e.message, true)
     }
@@ -73,7 +74,11 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
     try {
       await saveProduct({ [field]: newValue }, id)
       setProducts(current => current.map(p => p.id === id ? { ...p, [field]: newValue } : p))
-      addToast(`Product ${field === 'active' ? (newValue ? 'visible' : 'hidden') : (newValue > 0 ? 'in stock' : 'out of stock')}`)
+      addToast(
+        field === 'active'
+          ? (newValue ? 'المنتج ظاهر الآن' : 'المنتج مخفي الآن')
+          : (newValue > 0 ? 'المنتج متوفر في المخزون' : 'المنتج نفد من المخزون')
+      )
     } catch(e: any) {
       addToast(e.message, true)
     }
@@ -81,7 +86,7 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
 
   return (
     <>
-      <div className="fixed top-24 right-6 z-50 flex flex-col gap-space-xs pointer-events-none">
+      <div className="fixed top-24 end-6 z-50 flex flex-col gap-space-xs pointer-events-none">
         {toasts.map(toast => (
           <div key={toast.id} className={`pointer-events-auto flex items-center gap-space-xs px-space-md py-space-xs rounded-xl shadow-lg transition-all duration-300 ${toast.isError ? 'bg-error text-on-error' : 'bg-surface-container-lowest text-on-surface shadow-[0_10px_30px_-5px_rgba(143,58,72,0.15)]'}`}>
             <span className={`material-symbols-outlined text-[18px] ${toast.isError ? 'text-on-error' : 'text-primary'}`}>{toast.isError ? 'info' : 'check_circle'}</span>
@@ -95,15 +100,15 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
           <div className="space-y-space-xs">
             <div className="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm tracking-widest uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-              Boutique Inventory
+              مخزون المتجر
             </div>
-            <h1 className="font-headline-lg text-headline-lg text-on-surface">Products Management</h1>
+            <h1 className="font-headline-lg text-headline-lg text-on-surface">إدارة المنتجات</h1>
             <p className="font-body-md text-body-md text-on-surface-variant max-w-xl">
-              Add new formulations to the boutique catalog or manage existing luxury inventory with quiet precision.
+              أضيفي منتجات جديدة إلى المتجر أو أديري المخزون الحالي بدقة.
             </p>
           </div>
           <div className="flex items-center gap-space-xs bg-surface-container-lowest px-space-md py-space-xs rounded-full shadow-[0_4px_20px_-4px_rgba(143,58,72,0.06)] self-start md:self-auto">
-            <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Products:</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">المنتجات النشطة:</span>
             <span className="font-title-md text-title-md text-primary font-semibold">{products.length}</span>
           </div>
         </header>
@@ -114,30 +119,30 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
               <div className="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-primary">
                 <span className="material-symbols-outlined text-[16px]">add</span>
               </div>
-              <h2 className="font-headline-sm text-headline-sm text-on-surface">Add New Product</h2>
+              <h2 className="font-headline-sm text-headline-sm text-on-surface">إضافة منتج جديد</h2>
             </div>
             <form onSubmit={save} className="space-y-space-md">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-space-md">
                 <div className="md:col-span-5 flex flex-col gap-space-xs">
-                  <label htmlFor="input-name" className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Product Name</label>
-                  <input id="input-name" required value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} type="text" placeholder="e.g. Rose Quartz Hydrating Mist" className="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30" />
+                  <label htmlFor="input-name" className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">اسم المنتج</label>
+                  <input id="input-name" required value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} type="text" placeholder="مثال: رذاذ الورد المرطب" className="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30" />
                 </div>
                 <div className="md:col-span-3 flex flex-col gap-space-xs">
-                  <label htmlFor="input-price" className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Price (EGP)</label>
+                  <label htmlFor="input-price" className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">السعر (ج.م)</label>
                   <div className="relative flex items-center">
-                    <span className="absolute left-4 font-body-md text-body-md text-on-surface-variant select-none">EGP</span>
-                    <input id="input-price" required value={form.price} onChange={(e) => setForm({...form, price: e.target.value})} type="number" min="0" step="0.01" placeholder="38.00" className="w-full h-12 pl-12 pr-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30" />
+                    <span className="absolute start-4 font-body-md text-body-md text-on-surface-variant select-none">ج.م</span>
+                    <input id="input-price" required value={form.price} onChange={(e) => setForm({...form, price: e.target.value})} type="number" min="0" step="0.01" placeholder="38.00" dir="ltr" className="w-full h-12 ps-12 pe-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30 text-start" />
                   </div>
                 </div>
                 <div className="md:col-span-4 flex flex-col gap-space-xs">
-                  <label htmlFor="input-image" className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Image URL</label>
-                  <input id="input-image" type="url" value={form.image_url} onChange={(e) => setForm({...form, image_url: e.target.value})} placeholder="https://images.unsplash.com/..." className="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30" />
+                  <label htmlFor="input-image" className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">رابط الصورة</label>
+                  <input id="input-image" type="url" value={form.image_url} onChange={(e) => setForm({...form, image_url: e.target.value})} placeholder="https://images.unsplash.com/..." dir="ltr" className="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none transition-all placeholder:text-outline focus:shadow-[0_0_0_2px_rgba(147,51,68,0.25)] focus:bg-surface-container-low/30 text-start" />
                 </div>
               </div>
               <div className="flex items-center justify-end pt-space-xs">
                 <button type="submit" className="group inline-flex items-center gap-space-xs px-space-lg h-12 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider hover:bg-on-primary-fixed-variant transition-all shadow-[0_4px_14px_rgba(147,51,68,0.25)] active:scale-[0.99]">
                   <span className="material-symbols-outlined text-[18px] transition-transform group-hover:rotate-90">add</span>
-                  <span>Add Product</span>
+                  <span>إضافة المنتج</span>
                 </button>
               </div>
             </form>
@@ -145,16 +150,16 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
 
           <section className="space-y-space-md">
             <div>
-              <h2 className="font-headline-sm text-headline-sm text-on-surface">Current Products</h2>
-              <p className="font-body-md text-body-md text-on-surface-variant">Review and manage all products currently live in the Noor Store catalog.</p>
+              <h2 className="font-headline-sm text-headline-sm text-on-surface">المنتجات الحالية</h2>
+              <p className="font-body-md text-body-md text-on-surface-variant">راجعي وأديري جميع المنتجات المعروضة في متجر نور.</p>
             </div>
             
             <div className="bg-surface-container-lowest rounded-xl shadow-[0_8px_30px_-4px_rgba(143,58,72,0.05)] overflow-hidden">
               {products.length === 0 ? (
                 <div className="flex p-space-xl text-center flex-col items-center justify-center space-y-space-xs">
                   <span className="material-symbols-outlined text-[36px] text-outline">inventory_2</span>
-                  <p className="font-title-md text-title-md text-on-surface">No products currently active</p>
-                  <p className="font-body-sm text-body-sm text-on-surface-variant">Use the form above to add your first formulation to the boutique catalog.</p>
+                  <p className="font-title-md text-title-md text-on-surface">لا توجد منتجات نشطة حالياً</p>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant">استخدمي النموذج أعلاه لإضافة أول منتج إلى المتجر.</p>
                 </div>
               ) : (
                 <ul className="divide-y-0">
@@ -171,30 +176,30 @@ export default function AdminProductManager({ initialProducts }: { initialProduc
                           )}
                           {product.stock === 0 && (
                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                              <span className="text-[10px] text-white font-bold tracking-wider">OUT</span>
+                              <span className="text-[10px] text-white font-bold tracking-wider">نفد</span>
                             </div>
                           )}
                         </div>
                         <div className="min-w-0 flex flex-col">
                           <h3 className="font-title-md text-title-md text-on-surface truncate">{product.name}</h3>
                           <div className="flex items-center gap-2 mt-0.5">
-                            <span className="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">{product.category}</span>
-                            {!product.active && <span className="text-[9px] bg-outline/20 text-on-surface-variant px-1.5 py-0.5 rounded-full uppercase font-bold tracking-wider">Hidden</span>}
-                            {product.stock === 0 && <span className="text-[9px] bg-error/10 text-error px-1.5 py-0.5 rounded-full uppercase font-bold tracking-wider">Out of Stock</span>}
+                            <span className="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-wider">{translateCategory(product.category)}</span>
+                            {!product.active && <span className="text-[9px] bg-outline/20 text-on-surface-variant px-1.5 py-0.5 rounded-full uppercase font-bold tracking-wider">مخفي</span>}
+                            {product.stock === 0 && <span className="text-[9px] bg-error/10 text-error px-1.5 py-0.5 rounded-full uppercase font-bold tracking-wider">نفد من المخزون</span>}
                           </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-space-lg shrink-0">
-                        <div className="flex gap-1 md:gap-2 mr-2">
-                          <button type="button" onClick={() => toggleStatus(product.id, 'active', product.active)} className={`p-2 rounded-lg transition-colors ${product.active ? 'text-primary hover:bg-primary/10' : 'text-outline hover:bg-surface-container-high'}`} title={product.active ? 'Hide Product' : 'Show Product'}>
+                        <div className="flex gap-1 md:gap-2 ms-2">
+                          <button type="button" onClick={() => toggleStatus(product.id, 'active', product.active)} className={`p-2 rounded-lg transition-colors ${product.active ? 'text-primary hover:bg-primary/10' : 'text-outline hover:bg-surface-container-high'}`} title={product.active ? 'إخفاء المنتج' : 'إظهار المنتج'}>
                             <span className="material-symbols-outlined text-[20px]">{product.active ? 'visibility' : 'visibility_off'}</span>
                           </button>
-                          <button type="button" onClick={() => toggleStatus(product.id, 'stock', product.stock)} className={`p-2 rounded-lg transition-colors ${product.stock > 0 ? 'text-primary hover:bg-primary/10' : 'text-outline hover:bg-surface-container-high'}`} title={product.stock > 0 ? 'Mark Out of Stock' : 'Mark In Stock'}>
+                          <button type="button" onClick={() => toggleStatus(product.id, 'stock', product.stock)} className={`p-2 rounded-lg transition-colors ${product.stock > 0 ? 'text-primary hover:bg-primary/10' : 'text-outline hover:bg-surface-container-high'}`} title={product.stock > 0 ? 'تعليم كـ نفد' : 'تعليم كـ متوفر'}>
                             <span className="material-symbols-outlined text-[20px]">{product.stock > 0 ? 'inventory_2' : 'block'}</span>
                           </button>
                         </div>
-                        <span className="font-headline-sm text-headline-sm text-on-surface font-medium hidden md:inline-block">EGP {Number(product.price).toFixed(2)}</span>
-                        <button type="button" onClick={() => remove(product.id)} className="p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors ml-2" title="Delete formulation">
+                        <span className="font-headline-sm text-headline-sm text-on-surface font-medium hidden md:inline-block">{Number(product.price).toFixed(2)} ج.م</span>
+                        <button type="button" onClick={() => remove(product.id)} className="p-2 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors ms-2" title="حذف المنتج">
                           <span className="material-symbols-outlined text-[20px]">delete</span>
                         </button>
                       </div>

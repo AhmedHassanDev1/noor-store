@@ -40,8 +40,8 @@
   --shadow-card: 0 4px 20px rgba(178, 75, 91, 0.06);
   --shadow-floating: 0 20px 40px -15px rgba(178, 75, 91, 0.15);
 
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-jakarta);
+  --font-serif: var(--font-amiri);
+  --font-sans: var(--font-cairo);
 
   /* Admin Material 3 Theme Mappings */
   --color-primary: #B24B5B;
@@ -84,21 +84,21 @@
 }
 
 @layer utilities {
-  .font-headline-lg { font-family: var(--font-playfair); font-weight: 700; }
-  .font-headline-sm { font-family: var(--font-playfair); font-weight: 700; }
-  .font-title-md { font-family: var(--font-jakarta); font-weight: 600; }
-  .font-body-md { font-family: var(--font-jakarta); font-weight: 400; }
-  .font-body-sm { font-family: var(--font-jakarta); font-weight: 400; }
-  .font-label-md { font-family: var(--font-jakarta); font-weight: 500; }
-  .font-label-sm { font-family: var(--font-jakarta); font-weight: 500; }
+  .font-headline-lg { font-family: var(--font-amiri); font-weight: 700; }
+  .font-headline-sm { font-family: var(--font-amiri); font-weight: 700; }
+  .font-title-md { font-family: var(--font-cairo); font-weight: 600; }
+  .font-body-md { font-family: var(--font-cairo); font-weight: 400; }
+  .font-body-sm { font-family: var(--font-cairo); font-weight: 400; }
+  .font-label-md { font-family: var(--font-cairo); font-weight: 500; }
+  .font-label-sm { font-family: var(--font-cairo); font-weight: 500; }
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-jakarta), Arial, Helvetica, sans-serif; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-cairo), 'Segoe UI', Tahoma, sans-serif; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
-.font-serif { font-family: var(--font-playfair), Georgia, 'Times New Roman', serif; }
+.font-serif { font-family: var(--font-amiri), 'Traditional Arabic', serif; }
 ::selection { background: var(--color-brand-200); color: var(--color-brand-dark); }
 @media (prefers-reduced-motion: no-preference) { button, a { transition: color .2s, background-color .2s, border-color .2s, opacity .2s; } }
 
