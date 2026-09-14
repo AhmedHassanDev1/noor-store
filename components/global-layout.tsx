@@ -3,17 +3,23 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCart } from './cart-provider'
+import { signOut } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
-export default function GlobalLayout({ children, isAuthenticated }: { children: React.ReactNode, isAuthenticated: boolean }) {
+export default function GlobalLayout({ children, isAuthenticated, isAdmin = false }: { children: React.ReactNode, isAuthenticated: boolean, isAdmin?: boolean }) {
   const pathname = usePathname()
   const { totalItemsCount } = useCart()
   const [mounted, setMounted] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const WHATSAPP_PHONE = "201001234567"
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
 
   if (pathname.startsWith('/admin')) {
     return <>{children}</>
@@ -28,17 +34,17 @@ export default function GlobalLayout({ children, isAuthenticated }: { children: 
       </div>
 
       <header className="sticky top-0 z-40 bg-brand-surface/90 backdrop-blur-md border-b border-brand-200/60 transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          
-          <Link href="/" className="cursor-pointer flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-rose to-brand-200 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between gap-2">
+
+          <Link href="/" className="cursor-pointer flex items-center gap-2 sm:gap-3 group shrink-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-brand-rose to-brand-200 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
               <span className="font-serif text-white font-bold text-lg tracking-wider">N</span>
             </div>
             <div>
-              <span className="font-serif text-2xl font-bold tracking-tight text-brand-dark block leading-tight">
+              <span className="font-serif text-lg sm:text-2xl font-bold tracking-tight text-brand-dark block leading-tight">
                 NOOR <span className="font-light italic text-brand-600">Store</span>
               </span>
-              <span className="text-[10px] tracking-[0.25em] text-brand-muted uppercase block -mt-0.5">الجمال الفاخر</span>
+              <span className="hidden sm:block text-[10px] tracking-[0.25em] text-brand-muted uppercase block -mt-0.5">الجمال الفاخر</span>
             </div>
           </Link>
 
@@ -47,36 +53,48 @@ export default function GlobalLayout({ children, isAuthenticated }: { children: 
               href="/"
               className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
                 pathname === '/' || pathname.startsWith('/product/')
-                  ? 'text-brand-600 border-b-2 border-brand-600 pb-1' 
+                  ? 'text-brand-600 border-b-2 border-brand-600 pb-1'
                   : 'text-brand-muted hover:text-brand-dark'
               }`}
             >
               الرئيسية والمنتجات
             </Link>
-            <Link
-              href="/admin"
-              className="text-sm font-medium tracking-wide transition-colors duration-200 flex items-center gap-1.5 text-brand-muted hover:text-brand-dark"
-            >
-              <span className="material-symbols-outlined text-[16px]">shield</span>
-              لوحة الإدارة
-            </Link>
-            <Link
-              href="/login"
-              className={`text-sm font-medium tracking-wide transition-colors duration-200 flex items-center gap-1.5 ${
-                pathname === '/login' || pathname === '/signup'
-                  ? 'text-brand-600 border-b-2 border-brand-600 pb-1' 
-                  : 'text-brand-muted hover:text-brand-dark'
-              }`}
-            >
-              <span className="material-symbols-outlined text-[16px]">person</span>
-              {isAuthenticated ? 'حسابي (نشط)' : 'تسجيل الدخول'}
-            </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="text-sm font-medium tracking-wide transition-colors duration-200 flex items-center gap-1.5 text-brand-muted hover:text-brand-dark"
+              >
+                <span className="material-symbols-outlined text-[16px]">shield</span>
+                لوحة الإدارة
+              </Link>
+            )}
+            {isAuthenticated ? (
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="text-sm font-medium tracking-wide transition-colors duration-200 flex items-center gap-1.5 text-brand-muted hover:text-brand-dark cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-[16px]">logout</span>
+                تسجيل الخروج
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className={`text-sm font-medium tracking-wide transition-colors duration-200 flex items-center gap-1.5 ${
+                  pathname === '/login' || pathname === '/signup'
+                    ? 'text-brand-600 border-b-2 border-brand-600 pb-1'
+                    : 'text-brand-muted hover:text-brand-dark'
+                }`}
+              >
+                <span className="material-symbols-outlined text-[16px]">person</span>
+                تسجيل الدخول
+              </Link>
+            )}
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
             <Link
               href="/cart"
-              className="relative p-2.5 rounded-full bg-brand-100/70 hover:bg-brand-200 transition-all duration-200 text-brand-dark flex items-center justify-center group"
+              className="relative p-2 rounded-full bg-brand-100/70 hover:bg-brand-200 transition-all duration-200 text-brand-dark flex items-center justify-center group"
             >
               <span className="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform text-brand-600">shopping_bag</span>
               {mounted && totalItemsCount > 0 && (
@@ -86,17 +104,60 @@ export default function GlobalLayout({ children, isAuthenticated }: { children: 
               )}
             </Link>
 
-            <div className="md:hidden flex items-center">
-              <Link 
-                href={pathname === '/' ? '/cart' : '/'}
-                className="text-xs px-3 py-1.5 rounded-lg border border-brand-200 text-brand-muted"
-              >
-                {pathname === '/' ? 'السلة' : 'تسوق'}
-              </Link>
-            </div>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="القائمة"
+              aria-expanded={mobileMenuOpen}
+              className="md:hidden p-2 rounded-full bg-brand-100/70 hover:bg-brand-200 transition-all duration-200 text-brand-dark flex items-center justify-center"
+            >
+              <span className="material-symbols-outlined text-[22px] text-brand-600">
+                {mobileMenuOpen ? 'close' : 'menu'}
+              </span>
+            </button>
           </div>
 
         </div>
+
+        {mobileMenuOpen && (
+          <nav className="md:hidden border-t border-brand-200/60 bg-brand-surface px-4 py-3 space-y-1">
+            <Link
+              href="/"
+              className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                pathname === '/' || pathname.startsWith('/product/')
+                  ? 'bg-brand-100 text-brand-600'
+                  : 'text-brand-dark hover:bg-brand-100'
+              }`}
+            >
+              الرئيسية والمنتجات
+            </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="block px-3 py-2.5 rounded-lg text-sm font-medium text-brand-dark hover:bg-brand-100 flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-[18px]">shield</span>
+                لوحة الإدارة
+              </Link>
+            )}
+            {isAuthenticated ? (
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="w-full text-start px-3 py-2.5 rounded-lg text-sm font-medium text-brand-dark hover:bg-brand-100 flex items-center gap-2 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-[18px]">logout</span>
+                تسجيل الخروج
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="block px-3 py-2.5 rounded-lg text-sm font-medium text-brand-dark hover:bg-brand-100 flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-[18px]">person</span>
+                تسجيل الدخول
+              </Link>
+            )}
+          </nav>
+        )}
       </header>
 
       <main className="flex-1">

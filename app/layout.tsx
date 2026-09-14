@@ -57,6 +57,7 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOptions)
   const isAuthenticated = !!session?.user
+  const isAdmin = (session?.user as any)?.role === 'admin'
 
   return (
     <html lang="ar" dir="rtl">
@@ -65,7 +66,7 @@ export default async function RootLayout({
       </head>
       <body className={`${amiri.variable} ${cairo.variable} antialiased`}>
         <CartProvider>
-          <GlobalLayout isAuthenticated={isAuthenticated}>
+          <GlobalLayout isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
             {children}
           </GlobalLayout>
         </CartProvider>
